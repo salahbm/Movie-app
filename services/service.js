@@ -24,7 +24,7 @@ export const getUpcomingMovies = async () => {
 //Get Family Movies
 export const getFamilyMovies = async () => {
   const resp = await axios.get(
-    `${apiUrl}/discover//movie?${apiKey}&with_genres=10751`,
+    `${apiUrl}/discover/movie?${apiKey}&with_genres=10751`,
   );
 
   return resp.data.results;
@@ -33,7 +33,23 @@ export const getFamilyMovies = async () => {
 //Get Fantay Movies
 export const getFantacyMovies = async () => {
   const resp = await axios.get(
-    `${apiUrl}/discover//movie?${apiKey}&with_genres=14`,
+    `${apiUrl}/discover/movie?${apiKey}&with_genres=14`,
+  );
+
+  return resp.data.results;
+};
+
+//Get  Movie
+export const getMovie = async id => {
+  const resp = await axios.get(`${apiUrl}/movie/${id}?${apiKey}`);
+
+  return resp.data;
+};
+
+//Search Moviee & Tv by keyword
+export const searchMovieTv = async (query, type) => {
+  const resp = await axios.get(
+    `${apiUrl}/search/${type}?${apiKey}&query=${query}`,
   );
 
   return resp.data.results;

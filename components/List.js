@@ -1,15 +1,17 @@
 import React from 'react';
 import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import Card from './Card';
+import Detail from '../screens/Detail';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  item: PropTypes.object,
+  title: PropTypes.string,
+  content: PropTypes.array,
 };
 
 class List extends React.PureComponent {
   render() {
-    const {title, content} = this.props;
+    const {navigation, title, content} = this.props;
     return (
       <View>
         <View style={styles.list}>
@@ -19,7 +21,9 @@ class List extends React.PureComponent {
           <FlatList
             data={content}
             horizontal={true}
-            renderItem={({item}) => <Card item={item} />}></FlatList>
+            renderItem={({item}) => (
+              <Card navigation={navigation} item={item} />
+            )}></FlatList>
         </View>
       </View>
     );
@@ -28,10 +32,11 @@ class List extends React.PureComponent {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
 
-    paddingBottom: 20,
+    paddingTop: 10,
   },
   list: {
     marginTop: 40,

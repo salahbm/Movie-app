@@ -1,6 +1,8 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
+import {TouchableOpacity, StyleSheet, Image, Text, Button} from 'react-native';
 import PropTypes from 'prop-types';
+import Detail from '../screens/Detail';
+import {it} from 'node:test';
 
 const noImage = require('../assets/images/no-video.png');
 const propTypes = {
@@ -9,10 +11,12 @@ const propTypes = {
 
 class Card extends React.PureComponent {
   render() {
-    const {item} = this.props;
-    console.log(item.title);
+    const {navigation, item} = this.props;
+
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate('Detail', {movieId: item.id})}>
         <Image
           resizeMode="cover"
           style={styles.image}
@@ -31,8 +35,9 @@ class Card extends React.PureComponent {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    padding: 1,
     position: 'relative',
+
     alignItems: 'center',
 
     height: 200,
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius: 20,
     resizeMode: 'cover',
+    marginEnd: 3,
   },
   movieName: {
     position: 'absolute',
